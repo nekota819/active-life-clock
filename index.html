@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ACTIVE LIFE CLOCK｜健康に動ける時間はあと何年か？</title>
 <meta name="description" content="年齢と国を選ぶと、WHOの統計から、健康に動ける時間の平均があと何年かを計算します。185か国対応、無料、登録不要。個人の余命予測ではなく、集団の平均です。">
-<meta name="theme-color" content="#5B3DF5">
+<meta name="theme-color" content="#B02512">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%8F%B3%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ACTIVE LIFE CLOCK">
@@ -19,25 +22,26 @@
 <meta name="twitter:title" content="ACTIVE LIFE CLOCK｜健康に動ける時間はあと何年か？">
 <meta name="twitter:description" content="年齢と国を選ぶと、WHOの統計から、健康に動ける時間の平均があと何年かを計算します。185か国対応、無料、登録不要。個人の余命予測ではなく、集団の平均です。">
 <meta name="twitter:image" content="https://nekota819.github.io/active-life-clock/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F3EFFF;
-    --surface: #FFFFFF;
-    --ink: #1A1040;
-    --muted: #5A4F86;
-    --line: #D6CDFF;
-    --lived: #D2C8FF;
-    --remain: #5B3DF5;
-    --beyond: #E6338F;
-    --hero: #5B3DF5;
-    --spark: #FF4FA3;
-    --glow: #17D1E8;
-    --sticker: #FFE49A;
-    --fixed-ink: #1A1040;
-    --focus: #0B5AA6;
+    --head: #4A1F10;
+    --bg: #FFFFFF;
+    --surface: #FFF4DC;
+    --ink: #2E2018;
+    --muted: #74574A;
+    --line: #F1DDC4;
+    --field: #E9C79F;
+    --lived: #FFE0BC;
+    --remain: #D63A22;
+    --beyond: #8F6200;
+    --heroA: #B02512;
+    --heroB: #CC3A1B;
+    --heroC: #F28A2E;
+    --overA: #4A3A31;
+    --overB: #7A6355;
+    --btn: #FFC93C;
+    --btn-ink: #3A1A0E;
+    --focus: #8A4B00;
     color-scheme: light;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
@@ -45,102 +49,127 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #130C33;
-      --surface: #1E1450;
-      --ink: #F3EFFF;
-      --muted: #B5AAE6;
-      --line: #34287A;
-      --lived: #3A2E7A;
-      --remain: #8F7BFF;
-      --beyond: #FF6FB5;
-      --focus: #7DB8FF;
+      --head: #FFE4C4;
+      --bg: #1E1411;
+      --surface: #2B1C16;
+      --ink: #FFF0E0;
+      --muted: #CDB19F;
+      --line: #43302A;
+      --field: #6A4C3C;
+      --lived: #4B382E;
+      --remain: #FFA04D;
+      --beyond: #F0C86A;
+      --btn: #FFC93C;
+      --btn-ink: #3A1A0E;
+      --focus: #FFD27A;
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #130C33;
-    --surface: #1E1450;
-    --ink: #F3EFFF;
-    --muted: #B5AAE6;
-    --line: #34287A;
-    --lived: #3A2E7A;
-    --remain: #8F7BFF;
-    --beyond: #FF6FB5;
-    --focus: #7DB8FF;
+    --head: #FFE4C4;
+    --bg: #1E1411;
+    --surface: #2B1C16;
+    --ink: #FFF0E0;
+    --muted: #CDB19F;
+    --line: #43302A;
+    --field: #6A4C3C;
+    --lived: #4B382E;
+    --remain: #FFA04D;
+    --beyond: #F0C86A;
+    --btn: #FFC93C;
+    --btn-ink: #3A1A0E;
+    --focus: #FFD27A;
     color-scheme: dark;
   }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); }
   *, *::before, *::after { box-sizing: border-box; }
   body {
     margin: 0;
-    background-color: var(--bg);
-    background-image: radial-gradient(var(--line) 1px, transparent 1.4px);
-    background-size: 28px 28px;
+    background: var(--bg);
     color: var(--ink);
-    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
     font-size: 16px;
-    line-height: 1.7;
+    font-weight: 500;
+    line-height: 1.8;
   }
-  .wrap { max-width: 560px; margin: 0 auto; padding: 20px 18px 40px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 22px 20px 44px; }
   .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
   h1 {
     margin: 0; font-family: "Unbounded", "Zen Maru Gothic", system-ui, sans-serif;
-    font-size: 14px; font-weight: 800; letter-spacing: 0.02em;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.02em; color: var(--head);
   }
   .langs { display: flex; gap: 6px; flex-wrap: wrap; }
   .langs button {
-    font: inherit; font-size: 13px; font-weight: 700; color: var(--ink);
-    background: transparent; border: 2px solid var(--line); border-radius: 999px;
-    padding: 3px 12px; cursor: pointer;
+    font: inherit; font-size: 13px; font-weight: 700; color: var(--head);
+    background: transparent; border: 2px solid var(--field); border-radius: 999px;
+    padding: 2px 12px; cursor: pointer;
   }
-  .langs button[aria-pressed="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
-  .preview {
-    display: inline-block; margin: 16px 0 0; padding: 6px 14px; font-size: 13px; font-weight: 700;
-    color: var(--fixed-ink); background: var(--sticker); border-radius: 10px;
+  .langs button[aria-pressed="true"] { color: var(--bg); background: var(--head); border-color: var(--head); }
+  .lead {
+    margin: 34px 0 24px; font-size: clamp(27px, 7vw, 36px); line-height: 1.4;
+    font-weight: 900; letter-spacing: -0.01em; color: var(--head);
   }
-  .lead { margin: 26px 0 20px; font-size: 26px; line-height: 1.35; font-weight: 900; }
-  form { display: grid; grid-template-columns: 110px 1fr; gap: 14px; align-items: end; }
+  form { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: end; }
   label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
   input, select {
-    width: 100%; font: inherit; font-size: 18px; font-weight: 700; color: var(--ink);
-    background: var(--surface); border: 2px solid var(--ink); border-radius: 14px;
-    box-shadow: 3px 3px 0 var(--ink);
-    padding: 10px 14px; min-height: 52px;
+    width: 100%; font: inherit; font-size: 20px; font-weight: 700; color: var(--ink);
+    background: var(--bg); border: 2px solid var(--field); border-radius: 16px;
+    padding: 10px 16px; min-height: 56px;
   }
   input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
-    outline: 3px solid var(--focus); outline-offset: 3px;
+    outline: 3px solid var(--focus); outline-offset: 2px;
   }
   .result { margin-top: 28px; }
   .hero {
+    position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 20px 18px; color: #FFFFFF; background: var(--hero);
-    border: 2px solid var(--ink); border-radius: 24px; box-shadow: 5px 5px 0 var(--ink);
-    --g-line: #FFFFFF; --g-top: var(--glow); --g-bot: rgba(255, 255, 255, 0.4);
-    --g-over: #FFFFFF; --g-stream: var(--glow);
+    padding: 28px 22px; color: #FFFFFF; border-radius: 28px;
+    background: linear-gradient(115deg, var(--heroA) 0%, var(--heroB) 62%, var(--heroC) 100%);
+    --g-line: #FFFFFF; --g-top: #FFD34D; --g-bot: rgba(255, 255, 255, 0.4);
+    --g-over: rgba(255, 255, 255, 0.55); --g-stream: #FFD34D;
   }
+  .hero::after {
+    content: ""; position: absolute; width: 420px; height: 420px; right: -190px; top: -200px;
+    border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 50%; pointer-events: none;
+    box-shadow: 0 0 0 45px rgba(255, 255, 255, 0.04), 0 0 0 100px rgba(255, 255, 255, 0.04);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: linear-gradient(115deg, transparent 25%, #000 100%);
+    mask-image: linear-gradient(115deg, transparent 25%, #000 100%);
+  }
+  .hero > * { position: relative; z-index: 1; }
   .hero.over {
-    color: var(--fixed-ink); background: var(--spark);
-    --g-line: var(--fixed-ink); --g-top: transparent; --g-bot: var(--fixed-ink);
-    --g-over: var(--fixed-ink); --g-stream: var(--fixed-ink);
+    background: linear-gradient(115deg, var(--overA) 0%, var(--overB) 100%);
+    --g-top: transparent; --g-bot: rgba(255, 255, 255, 0.55);
   }
-  .empty { padding: 4px 0; font-weight: 700; }
+  .empty { padding: 4px 0; font-weight: 700; font-size: 17px; }
   .numrow { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .num {
-    font-family: "Unbounded", system-ui, sans-serif; font-weight: 800;
-    font-size: clamp(44px, 14vw, 78px); line-height: 1.1;
-    font-variant-numeric: tabular-nums; color: inherit; text-shadow: 3px 3px 0 var(--spark);
+    font-family: "Unbounded", "Zen Maru Gothic", system-ui, sans-serif;
+    font-size: clamp(42px, 12.5vw, 76px); font-weight: 800; letter-spacing: 0; line-height: 1.1;
+    font-variant-numeric: tabular-nums; color: inherit; text-shadow: 0 0 28px rgba(255, 211, 77, 0.35);
   }
-  .hero.over .num { text-shadow: 3px 3px 0 #FFFFFF; }
+  .hero.over .num { text-shadow: none; }
   .unit { font-size: 22px; font-weight: 900; }
+  @media (max-width: 420px) { .dial { width: 104px; } }
   .desc { margin: 6px 0 0; font-size: 15px; font-weight: 700; }
-  .sub { margin: 4px 0 0; font-size: 14px; font-variant-numeric: tabular-nums; opacity: 0.92; }
-  .note { margin: 8px 0 0; font-size: 14px; opacity: 0.92; }
-  .glass { flex: none; width: 60px; height: auto; }
+  .sub { margin: 4px 0 0; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; opacity: 0.95; }
+  .note { margin: 8px 0 0; font-size: 14px; opacity: 0.95; }
+  .dial { flex: none; width: 132px; height: auto; }
+  .arc { filter: drop-shadow(0 0 4px rgba(255, 211, 77, 0.75)); }
   .stream { stroke-dasharray: 2 3; }
   @keyframes fall { to { stroke-dashoffset: -5; } }
+  @keyframes arcin { from { stroke-dasharray: 0 400; } }
   @media (prefers-reduced-motion: no-preference) {
     .stream { animation: fall 0.6s linear infinite; }
+    .arc { animation: arcin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
   }
+  .basis { margin-top: 18px; padding-top: 12px; border-top: 2px dashed var(--field); font-size: 13px; color: var(--muted); }
+  .basis-title { font-size: 13px; font-weight: 900; letter-spacing: 0.04em; color: var(--remain); }
+  .basis p { margin: 4px 0 0; font-variant-numeric: tabular-nums; }
   .bar { margin-top: 26px; display: grid; gap: 5px; }
   .row { display: grid; grid-template-columns: 26px repeat(10, 1fr); gap: 5px; align-items: center; }
   .tick { font-size: 11px; font-weight: 700; color: var(--muted); text-align: right; padding-right: 4px; font-variant-numeric: tabular-nums; }
@@ -155,17 +184,17 @@
   .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--muted); }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .legend i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--line); }
-  .actions { margin-top: 22px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .actions { margin-top: 22px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .actions button, .actions a {
-    font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); background: var(--surface);
+    font: inherit; font-size: 15px; font-weight: 900; color: var(--head); background: transparent;
     text-decoration: none; cursor: pointer;
-    border: 2px solid var(--ink); border-radius: 999px; padding: 8px 18px; min-height: 46px;
-    display: inline-flex; align-items: center; box-shadow: 3px 3px 0 var(--ink);
+    border: 2px solid var(--field); border-radius: 999px; padding: 8px 20px; min-height: 48px;
+    display: inline-flex; align-items: center;
   }
-  .actions a { color: var(--fixed-ink); background: var(--spark); }
-  .actions button:active, .actions a:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .actions a { color: var(--btn-ink); background: var(--btn); border-color: var(--btn); }
+  .actions button:active, .actions a:active { transform: translateY(1px); }
   .status { font-size: 14px; font-weight: 700; color: var(--muted); }
-  .foot { margin-top: 38px; padding-top: 16px; border-top: 2px dashed var(--line); font-size: 13px; color: var(--muted); }
+  .foot { margin-top: 38px; padding-top: 16px; border-top: 2px dashed var(--line); font-size: 12px; color: var(--muted); }
   .foot p { margin: 0 0 8px; }
 </style>
 </head>
@@ -467,6 +496,13 @@
     }
   };
 
+  var BASIS = {
+    ja: { title: "算出の根拠", fact: "{c}の出生時健康寿命: {hale}年(WHO、{year}年推計)", calc: "{hale} − {age} = {r}年(本ツールによる単純計算)", indep: "個人が運営する独立プロジェクトです。特定の企業の公式サービスではありません。" },
+    en: { title: "Basis", fact: "Healthy life expectancy at birth, {c}: {hale} years (WHO, {year} estimate)", calc: "{hale} − {age} = {r} years (simple calculation by this tool)", indep: "An independent personal project. Not an official service of any company." },
+    zh: { title: "计算依据", fact: "{c}出生时健康预期寿命：{hale} 年（WHO，{year} 年估计）", calc: "{hale} − {age} = {r} 年（本工具的简单计算）", indep: "这是个人运营的独立项目，并非任何公司的官方服务。" },
+    es: { title: "Base del cálculo", fact: "Esperanza de vida saludable al nacer, {c}: {hale} años (OMS, estimación de {year})", calc: "{hale} − {age} = {r} años (cálculo simple de esta herramienta)", indep: "Proyecto personal independiente. No es un servicio oficial de ninguna empresa." }
+  };
+
   var lang = "en";
   var nav = (navigator.language || "en").toLowerCase();
   if (nav.indexOf("ja") === 0) lang = "ja";
@@ -521,7 +557,8 @@
     $("foot").innerHTML = "";
     var p1 = document.createElement("p"); p1.textContent = s.foot1;
     var p2 = document.createElement("p"); p2.textContent = fmt(s.foot2, { year: year });
-    $("foot").appendChild(p1); $("foot").appendChild(p2);
+    var p3 = document.createElement("p"); p3.textContent = BASIS[lang].indep;
+    $("foot").appendChild(p1); $("foot").appendChild(p2); $("foot").appendChild(p3);
   }
 
   function buildBar(age, hale) {
@@ -553,7 +590,7 @@
     return bar;
   }
 
-  function hourglassEl(ratio, over) {
+  function dialEl(ratio, over) {
     var NS = "http://www.w3.org/2000/svg";
     function mk(tag, attrs, css) {
       var el = document.createElementNS(NS, tag);
@@ -564,23 +601,40 @@
     var GLASS = "M10 10 V14 C10 34 26 42 26 50 C26 58 10 66 10 86 V90 H50 V86 C50 66 34 58 34 50 C34 42 50 34 50 14 V10 Z";
     var r = Math.max(0, Math.min(1, ratio));
     var topH = 38 * r, botH = 38 * (1 - r);
-    var svg = mk("svg", { viewBox: "0 0 60 100", width: "64", height: "107", "aria-hidden": "true", "class": "glass" });
+    var svg = mk("svg", { viewBox: "0 0 160 160", width: "132", height: "132", "aria-hidden": "true", "class": "dial" });
     var defs = mk("defs", {});
     var cp = mk("clipPath", { id: "glassClip" });
     cp.appendChild(mk("path", { d: GLASS }));
     defs.appendChild(cp);
     svg.appendChild(defs);
-    var g = mk("g", { "clip-path": "url(#glassClip)" });
-    if (topH > 0) g.appendChild(mk("rect", { x: 0, y: 48 - topH, width: 60, height: topH }, { fill: "var(--g-top)" }));
-    if (botH > 0) g.appendChild(mk("rect", { x: 0, y: 90 - botH, width: 60, height: botH }, { fill: over ? "var(--g-over)" : "var(--g-bot)" }));
-    svg.appendChild(g);
-    if (r > 0) {
-      svg.appendChild(mk("line", { x1: 30, y1: 48, x2: 30, y2: 90 - botH, "class": "stream" },
-        { stroke: "var(--g-stream)", strokeWidth: "1.8" }));
+    for (var i = 0; i < 60; i++) {
+      var a = (i * 6 - 90) * Math.PI / 180, major = i % 5 === 0;
+      var r1 = major ? 70 : 73, r2 = 77;
+      svg.appendChild(mk("line", {
+        x1: (80 + r1 * Math.cos(a)).toFixed(2), y1: (80 + r1 * Math.sin(a)).toFixed(2),
+        x2: (80 + r2 * Math.cos(a)).toFixed(2), y2: (80 + r2 * Math.sin(a)).toFixed(2)
+      }, { stroke: "var(--g-line)", strokeWidth: major ? "1.6" : "1", opacity: major ? "0.7" : "0.35" }));
     }
-    svg.appendChild(mk("path", { d: GLASS }, { fill: "none", stroke: "var(--g-line)", strokeWidth: "3", strokeLinejoin: "round" }));
-    svg.appendChild(mk("rect", { x: 6, y: 4, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
-    svg.appendChild(mk("rect", { x: 6, y: 91, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
+    svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62 }, { fill: "none", stroke: "var(--g-line)", strokeWidth: "4", opacity: "0.18" }));
+    if (over) {
+      svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62 }, { fill: "none", stroke: "var(--g-over)", strokeWidth: "4", strokeDasharray: "1 4", opacity: "0.8" }));
+    } else if (r > 0) {
+      svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62, transform: "rotate(-90 80 80)", "class": "arc" },
+        { fill: "none", stroke: "var(--g-top)", strokeWidth: "4", strokeLinecap: "round", strokeDasharray: (r * 389.56).toFixed(1) + " 400" }));
+    }
+    var g = mk("g", { transform: "translate(60.8 48) scale(0.64)" });
+    var clip = mk("g", { "clip-path": "url(#glassClip)" });
+    if (topH > 0) clip.appendChild(mk("rect", { x: 0, y: 48 - topH, width: 60, height: topH }, { fill: "var(--g-top)" }));
+    if (botH > 0) clip.appendChild(mk("rect", { x: 0, y: 90 - botH, width: 60, height: botH }, { fill: over ? "var(--g-over)" : "var(--g-bot)" }));
+    g.appendChild(clip);
+    if (r > 0) {
+      g.appendChild(mk("line", { x1: 30, y1: 48, x2: 30, y2: 90 - botH, "class": "stream" },
+        { stroke: "var(--g-stream)", strokeWidth: "2.4" }));
+    }
+    g.appendChild(mk("path", { d: GLASS }, { fill: "none", stroke: "var(--g-line)", strokeWidth: "4", strokeLinejoin: "round" }));
+    g.appendChild(mk("rect", { x: 6, y: 4, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
+    g.appendChild(mk("rect", { x: 6, y: 91, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
+    svg.appendChild(g);
     return svg;
   }
 
@@ -618,7 +672,7 @@
     if (raw === "" || isNaN(age) || age < 0 || age > 120) {
       var e = document.createElement("div"); e.className = "empty"; e.textContent = s.empty;
       var h0 = document.createElement("div"); h0.className = "hero";
-      h0.appendChild(e); h0.appendChild(hourglassEl(1, false));
+      h0.appendChild(e); h0.appendChild(dialEl(1, false));
       resultEl.appendChild(h0);
       return;
     }
@@ -653,8 +707,18 @@
     }
 
     hero.appendChild(heroText);
-    hero.appendChild(hourglassEl(over ? 0 : diff / hale, over));
+    hero.appendChild(dialEl(over ? 0 : diff / hale, over));
     resultEl.appendChild(hero);
+
+    var bs = BASIS[lang];
+    var basis = document.createElement("div"); basis.className = "basis";
+    var bt = document.createElement("div"); bt.className = "basis-title"; bt.textContent = bs.title;
+    var bf = document.createElement("p");
+    bf.textContent = fmt(bs.fact, { c: cname, hale: num(hale, 1), year: d.year });
+    var bc = document.createElement("p");
+    bc.textContent = fmt(bs.calc, { hale: num(hale, 1), age: age, r: (diff < 0 ? "−" : "") + num(Math.abs(diff), 1) });
+    basis.appendChild(bt); basis.appendChild(bf); basis.appendChild(bc);
+    resultEl.appendChild(basis);
 
     var bar = buildBar(age, hale);
     bar.setAttribute("role", "img");
