@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACTIVE LIFE CLOCK｜健康に動ける時間はあと何年か？</title>
+<meta name="description" content="年齢と国を選ぶと、WHOの統計から、健康に動ける時間の平均があと何年かを計算します。185か国対応、無料、登録不要。個人の余命予測ではなく、集団の平均です。">
+<meta name="theme-color" content="#B02512">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%8F%B3%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ACTIVE LIFE CLOCK">
+<meta property="og:title" content="ACTIVE LIFE CLOCK｜健康に動ける時間はあと何年か？">
+<meta property="og:description" content="年齢と国を選ぶと、WHOの統計から、健康に動ける時間の平均があと何年かを計算します。185か国対応、無料、登録不要。個人の余命予測ではなく、集団の平均です。">
+<meta property="og:url" content="https://nekota819.github.io/active-life-clock/">
+<meta property="og:image" content="https://nekota819.github.io/active-life-clock/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ACTIVE LIFE CLOCK｜健康に動ける時間はあと何年か？">
+<meta name="twitter:description" content="年齢と国を選ぶと、WHOの統計から、健康に動ける時間の平均があと何年かを計算します。185か国対応、無料、登録不要。個人の余命予測ではなく、集団の平均です。">
+<meta name="twitter:image" content="https://nekota819.github.io/active-life-clock/og-image.png">
+<style>
+  :root {
+    --head: #4A1F10;
+    --bg: #FFFFFF;
+    --surface: #FFF4DC;
+    --ink: #2E2018;
+    --muted: #74574A;
+    --line: #F1DDC4;
+    --field: #E9C79F;
+    --lived: #FFE0BC;
+    --remain: #D63A22;
+    --beyond: #8F6200;
+    --heroA: #B02512;
+    --heroB: #CC3A1B;
+    --heroC: #F28A2E;
+    --overA: #4A3A31;
+    --overB: #7A6355;
+    --btn: #FFC93C;
+    --btn-ink: #3A1A0E;
+    --focus: #8A4B00;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 22px 20px 44px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  h1 {
+    margin: 0; font-family: "Unbounded", "Zen Maru Gothic", system-ui, sans-serif;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.02em; color: var(--head);
+  }
+  .langs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .langs button {
+    font: inherit; font-size: 13px; font-weight: 700; color: var(--head);
+    background: transparent; border: 2px solid var(--field); border-radius: 999px;
+    padding: 2px 12px; cursor: pointer;
+  }
+  .langs button[aria-pressed="true"] { color: var(--bg); background: var(--head); border-color: var(--head); }
+  .lead {
+    margin: 34px 0 24px; font-size: clamp(27px, 7vw, 36px); line-height: 1.4;
+    font-weight: 900; letter-spacing: -0.01em; color: var(--head);
+  }
+  form { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: end; }
+  label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+  input, select {
+    width: 100%; font: inherit; font-size: 20px; font-weight: 700; color: var(--ink);
+    background: var(--bg); border: 2px solid var(--field); border-radius: 16px;
+    padding: 10px 16px; min-height: 56px;
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 2px;
+  }
+  .result { margin-top: 28px; }
+  .hero {
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 28px 22px; color: #FFFFFF; border-radius: 28px;
+    background: linear-gradient(115deg, var(--heroA) 0%, var(--heroB) 62%, var(--heroC) 100%);
+    --g-line: #FFFFFF; --g-top: #FFD34D; --g-bot: rgba(255, 255, 255, 0.4);
+    --g-over: rgba(255, 255, 255, 0.55); --g-stream: #FFD34D;
+  }
+  .hero::after {
+    content: ""; position: absolute; width: 420px; height: 420px; right: -190px; top: -200px;
+    border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 50%; pointer-events: none;
+    box-shadow: 0 0 0 45px rgba(255, 255, 255, 0.04), 0 0 0 100px rgba(255, 255, 255, 0.04);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: linear-gradient(115deg, transparent 25%, #000 100%);
+    mask-image: linear-gradient(115deg, transparent 25%, #000 100%);
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero.over {
+    background: linear-gradient(115deg, var(--overA) 0%, var(--overB) 100%);
+    --g-top: transparent; --g-bot: rgba(255, 255, 255, 0.55);
+  }
+  .empty { padding: 4px 0; font-weight: 700; font-size: 17px; }
+  .numrow { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .num {
+    font-family: "Unbounded", "Zen Maru Gothic", system-ui, sans-serif;
+    font-size: clamp(42px, 12.5vw, 76px); font-weight: 800; letter-spacing: 0; line-height: 1.1;
+    font-variant-numeric: tabular-nums; color: inherit; text-shadow: 0 0 28px rgba(255, 211, 77, 0.35);
+  }
+  .hero.over .num { text-shadow: none; }
+  .unit { font-size: 22px; font-weight: 900; }
+  @media (max-width: 420px) { .dial { width: 104px; } }
+  .desc { margin: 6px 0 0; font-size: 15px; font-weight: 700; }
+  .sub { margin: 4px 0 0; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; opacity: 0.95; }
+  .note { margin: 8px 0 0; font-size: 14px; opacity: 0.95; }
+  .dial { flex: none; width: 132px; height: auto; }
+  .arc { filter: drop-shadow(0 0 4px rgba(255, 211, 77, 0.75)); }
+  .stream { stroke-dasharray: 2 3; }
+  @keyframes fall { to { stroke-dashoffset: -5; } }
+  @keyframes arcin { from { stroke-dasharray: 0 400; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .stream { animation: fall 0.6s linear infinite; }
+    .arc { animation: arcin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  }
+  .basis { margin-top: 18px; padding-top: 12px; border-top: 2px dashed var(--field); font-size: 13px; color: var(--muted); }
+  .basis-title { font-size: 13px; font-weight: 900; letter-spacing: 0.04em; color: var(--remain); }
+  .basis p { margin: 4px 0 0; font-variant-numeric: tabular-nums; }
+  .bar { margin-top: 26px; display: grid; gap: 5px; }
+  .row { display: grid; grid-template-columns: 26px repeat(10, 1fr); gap: 5px; align-items: center; }
+  .tick { font-size: 11px; font-weight: 700; color: var(--muted); text-align: right; padding-right: 4px; font-variant-numeric: tabular-nums; }
+  .cell { aspect-ratio: 1 / 1; border-radius: 50%; background: transparent; border: 1.5px solid var(--line); }
+  .cell.lived { background: var(--lived); border-color: var(--lived); }
+  .cell.remain { background: var(--remain); border-color: var(--remain); }
+  .cell.beyond {
+    border-color: var(--beyond);
+    background: repeating-linear-gradient(135deg, var(--beyond) 0 2px, transparent 2px 5px);
+  }
+  .cell.void { visibility: hidden; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--line); }
+  .actions { margin-top: 22px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .actions button, .actions a {
+    font: inherit; font-size: 15px; font-weight: 900; color: var(--head); background: transparent;
+    text-decoration: none; cursor: pointer;
+    border: 2px solid var(--field); border-radius: 999px; padding: 8px 20px; min-height: 48px;
+    display: inline-flex; align-items: center;
+  }
+  .actions a { color: var(--btn-ink); background: var(--btn); border-color: var(--btn); }
+  .actions button:active, .actions a:active { transform: translateY(1px); }
+  .status { font-size: 14px; font-weight: 700; color: var(--muted); }
+  .foot { margin-top: 38px; padding-top: 16px; border-top: 2px dashed var(--line); font-size: 12px; color: var(--muted); }
+  .foot p { margin: 0 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>ACTIVE LIFE CLOCK</h1>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="ja">日本語</button>
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="zh">中文</button>
+      <button type="button" data-lang="es">Español</button>
+    </div>
+  </div>
+  <p class="lead" id="lead"></p>
+  <form id="form" onsubmit="return false">
+    <div>
+      <label for="age" id="ageLabel"></label>
+      <input id="age" type="number" inputmode="numeric" min="0" max="120" step="1" autocomplete="off">
+    </div>
+    <div>
+      <label for="country" id="countryLabel"></label>
+      <select id="country"></select>
+    </div>
+  </form>
+  <div class="result" id="result" aria-live="polite"></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // 出典: WHO 出生時健康寿命(HALE at birth)、男女計、2021年推計。
+  // 取得経路: Our World in Data が加工した WHO Global Health Observatory データのCSV(2026-11-10取得)。
+  // 国名・値はCSVの国別行のみ(WHO地域・世界の集計行は除外)。全国とも2021年値。
+  // 先に確認した別経路(statisticsoftheworld.com)の10か国と値が一致することを確認済み。
+  // WHO一次データとの照合、およびより新しいWHO公表の有無は未確認。
+  var DATA = {
+    AF: { hale: 50.446243, year: 2021 },
+    AL: { hale: 66.68796, year: 2021 },
+    DZ: { hale: 65.548195, year: 2021 },
+    AO: { hale: 53.76187, year: 2021 },
+    AG: { hale: 66.52282, year: 2021 },
+    AR: { hale: 64.794365, year: 2021 },
+    AM: { hale: 64.013306, year: 2021 },
+    AU: { hale: 70.60636, year: 2021 },
+    AT: { hale: 69.78945, year: 2021 },
+    AZ: { hale: 64.04244, year: 2021 },
+    BS: { hale: 61.515293, year: 2021 },
+    BH: { hale: 64.23785, year: 2021 },
+    BD: { hale: 63.05119, year: 2021 },
+    BB: { hale: 66.66857, year: 2021 },
+    BY: { hale: 63.707623, year: 2021 },
+    BE: { hale: 69.79468, year: 2021 },
+    BZ: { hale: 63.824715, year: 2021 },
+    BJ: { hale: 55.715813, year: 2021 },
+    BT: { hale: 64.80463, year: 2021 },
+    BO: { hale: 57.4254, year: 2021 },
+    BA: { hale: 64.98582, year: 2021 },
+    BW: { hale: 53.103672, year: 2021 },
+    BR: { hale: 61.826534, year: 2021 },
+    BN: { hale: 67.10358, year: 2021 },
+    BG: { hale: 62.388905, year: 2021 },
+    BF: { hale: 54.562424, year: 2021 },
+    BI: { hale: 55.84414, year: 2021 },
+    KH: { hale: 60.630722, year: 2021 },
+    CM: { hale: 54.007027, year: 2021 },
+    CA: { hale: 69.7836, year: 2021 },
+    CV: { hale: 63.765907, year: 2021 },
+    CF: { hale: 45.43289, year: 2021 },
+    TD: { hale: 51.51506, year: 2021 },
+    CL: { hale: 67.652306, year: 2021 },
+    CN: { hale: 68.58452, year: 2021 },
+    CO: { hale: 65.02157, year: 2021 },
+    KM: { hale: 59.019386, year: 2021 },
+    CG: { hale: 54.835735, year: 2021 },
+    CR: { hale: 67.63482, year: 2021 },
+    CI: { hale: 55.406254, year: 2021 },
+    HR: { hale: 66.80261, year: 2021 },
+    CU: { hale: 64.61947, year: 2021 },
+    CY: { hale: 70.74238, year: 2021 },
+    CZ: { hale: 66.657166, year: 2021 },
+    CD: { hale: 53.20516, year: 2021 },
+    DK: { hale: 70.05689, year: 2021 },
+    DJ: { hale: 56.992367, year: 2021 },
+    DO: { hale: 63.56255, year: 2021 },
+    TL: { hale: 59.53127, year: 2021 },
+    EC: { hale: 64.341545, year: 2021 },
+    EG: { hale: 60.363174, year: 2021 },
+    SV: { hale: 62.1961, year: 2021 },
+    GQ: { hale: 53.256332, year: 2021 },
+    ER: { hale: 55.424946, year: 2021 },
+    EE: { hale: 66.740326, year: 2021 },
+    SZ: { hale: 47.467403, year: 2021 },
+    ET: { hale: 58.827312, year: 2021 },
+    FJ: { hale: 57.690556, year: 2021 },
+    FI: { hale: 69.92942, year: 2021 },
+    FR: { hale: 70.08346, year: 2021 },
+    GA: { hale: 56.25887, year: 2021 },
+    GM: { hale: 55.842545, year: 2021 },
+    GE: { hale: 62.475845, year: 2021 },
+    DE: { hale: 68.93389, year: 2021 },
+    GH: { hale: 57.88252, year: 2021 },
+    GR: { hale: 68.55282, year: 2021 },
+    GD: { hale: 63.16201, year: 2021 },
+    GT: { hale: 59.253277, year: 2021 },
+    GN: { hale: 53.426258, year: 2021 },
+    GW: { hale: 51.450367, year: 2021 },
+    GY: { hale: 56.82071, year: 2021 },
+    HT: { hale: 53.936195, year: 2021 },
+    HN: { hale: 60.046482, year: 2021 },
+    HU: { hale: 64.83879, year: 2021 },
+    IS: { hale: 71.37048, year: 2021 },
+    IN: { hale: 58.146748, year: 2021 },
+    ID: { hale: 60.669247, year: 2021 },
+    IR: { hale: 63.975155, year: 2021 },
+    IQ: { hale: 61.01582, year: 2021 },
+    IE: { hale: 70.00318, year: 2021 },
+    IL: { hale: 70.75752, year: 2021 },
+    IT: { hale: 70.56465, year: 2021 },
+    JM: { hale: 61.72002, year: 2021 },
+    JP: { hale: 73.39519, year: 2021 },
+    JO: { hale: 65.066635, year: 2021 },
+    KZ: { hale: 61.55452, year: 2021 },
+    KE: { hale: 58.217083, year: 2021 },
+    KI: { hale: 53.649876, year: 2021 },
+    KW: { hale: 67.78423, year: 2021 },
+    KG: { hale: 63.424274, year: 2021 },
+    LA: { hale: 60.411804, year: 2021 },
+    LV: { hale: 63.762672, year: 2021 },
+    LB: { hale: 63.216427, year: 2021 },
+    LS: { hale: 44.634335, year: 2021 },
+    LR: { hale: 53.961, year: 2021 },
+    LY: { hale: 62.056973, year: 2021 },
+    LT: { hale: 64.228134, year: 2021 },
+    LU: { hale: 71.23441, year: 2021 },
+    MG: { hale: 55.13702, year: 2021 },
+    MW: { hale: 54.668175, year: 2021 },
+    MY: { hale: 63.94692, year: 2021 },
+    MV: { hale: 66.6742, year: 2021 },
+    ML: { hale: 53.557148, year: 2021 },
+    MT: { hale: 70.71279, year: 2021 },
+    MR: { hale: 60.393124, year: 2021 },
+    MU: { hale: 63.6317, year: 2021 },
+    MX: { hale: 61.435184, year: 2021 },
+    FM: { hale: 57.931187, year: 2021 },
+    MD: { hale: 61.21178, year: 2021 },
+    MN: { hale: 61.313164, year: 2021 },
+    ME: { hale: 65.14715, year: 2021 },
+    MA: { hale: 62.339653, year: 2021 },
+    MZ: { hale: 49.71591, year: 2021 },
+    MM: { hale: 59.75065, year: 2021 },
+    NA: { hale: 52.822964, year: 2021 },
+    NP: { hale: 60.203896, year: 2021 },
+    NL: { hale: 69.968704, year: 2021 },
+    NZ: { hale: 69.983215, year: 2021 },
+    NI: { hale: 64.614494, year: 2021 },
+    NE: { hale: 52.609917, year: 2021 },
+    NG: { hale: 54.949795, year: 2021 },
+    KP: { hale: 64.73145, year: 2021 },
+    MK: { hale: 63.71235, year: 2021 },
+    NO: { hale: 71.155304, year: 2021 },
+    OM: { hale: 63.191647, year: 2021 },
+    PK: { hale: 56.89015, year: 2021 },
+    PS: { hale: 62.934635, year: 2021 },
+    PA: { hale: 66.73553, year: 2021 },
+    PG: { hale: 57.48176, year: 2021 },
+    PY: { hale: 60.87814, year: 2021 },
+    PE: { hale: 62.98693, year: 2021 },
+    PH: { hale: 58.767803, year: 2021 },
+    PL: { hale: 65.52082, year: 2021 },
+    PT: { hale: 69.51927, year: 2021 },
+    PR: { hale: 68.82376, year: 2021 },
+    QA: { hale: 66.20631, year: 2021 },
+    RO: { hale: 63.847126, year: 2021 },
+    RU: { hale: 60.939556, year: 2021 },
+    RW: { hale: 58.712322, year: 2021 },
+    LC: { hale: 61.762, year: 2021 },
+    VC: { hale: 62.87965, year: 2021 },
+    WS: { hale: 61.570282, year: 2021 },
+    ST: { hale: 62.442562, year: 2021 },
+    SA: { hale: 65.644516, year: 2021 },
+    SN: { hale: 58.903, year: 2021 },
+    RS: { hale: 63.874767, year: 2021 },
+    SC: { hale: 64.72145, year: 2021 },
+    SL: { hale: 53.127224, year: 2021 },
+    SG: { hale: 73.64695, year: 2021 },
+    SK: { hale: 64.941284, year: 2021 },
+    SI: { hale: 69.35554, year: 2021 },
+    SB: { hale: 57.367176, year: 2021 },
+    SO: { hale: 47.423386, year: 2021 },
+    ZA: { hale: 52.757084, year: 2021 },
+    KR: { hale: 72.450584, year: 2021 },
+    SS: { hale: 50.530018, year: 2021 },
+    ES: { hale: 71.10702, year: 2021 },
+    LK: { hale: 66.728264, year: 2021 },
+    SD: { hale: 58.539787, year: 2021 },
+    SR: { hale: 60.30026, year: 2021 },
+    SE: { hale: 71.118324, year: 2021 },
+    CH: { hale: 71.14916, year: 2021 },
+    SY: { hale: 62.270653, year: 2021 },
+    TJ: { hale: 63.085102, year: 2021 },
+    TZ: { hale: 58.07287, year: 2021 },
+    TH: { hale: 65.75673, year: 2021 },
+    TG: { hale: 55.849014, year: 2021 },
+    TO: { hale: 63.78331, year: 2021 },
+    TT: { hale: 61.9447, year: 2021 },
+    TN: { hale: 63.579803, year: 2021 },
+    TR: { hale: 65.20501, year: 2021 },
+    TM: { hale: 60.82373, year: 2021 },
+    UG: { hale: 57.224392, year: 2021 },
+    UA: { hale: 61.55216, year: 2021 },
+    AE: { hale: 67.273705, year: 2021 },
+    GB: { hale: 68.636314, year: 2021 },
+    US: { hale: 63.91496, year: 2021 },
+    UY: { hale: 64.98707, year: 2021 },
+    UZ: { hale: 63.358875, year: 2021 },
+    VU: { hale: 58.682552, year: 2021 },
+    VE: { hale: 62.046158, year: 2021 },
+    VN: { hale: 65.35113, year: 2021 },
+    YE: { hale: 56.463676, year: 2021 },
+    ZM: { hale: 52.970093, year: 2021 },
+    ZW: { hale: 51.248913, year: 2021 }
+  };
+
+  var STR = {
+    ja: {
+      lang: "ja",
+      preview: "プレビュー版: {n}か国を収録(2021年推計)。公開前に、より新しいWHOの発表がないか確認します。",
+      lead: "健康に動ける時間はあと何年か？",
+      age: "年齢", country: "国",
+      empty: "年齢と国を選ぶと計算します。",
+      unit: "年",
+      remainDesc: "統計上の平均で、健康に動ける時間が残っています",
+      overDesc: "統計上の健康寿命をすでに超えています",
+      days: "約{d}日", months: "約{m}ヶ月", weeks: "週末にして約{w}回",
+      overNote: "これは集団の平均で、あなた個人の将来を示すものではありません。",
+      lived: "経過", remain: "残り", beyond: "平均超過",
+      copy: "結果をコピー", shareX: "Xでシェア", shareOs: "ほかのアプリで共有", tag: "#ACTIVELIFECLOCK", copied: "コピーしました", copyFail: "コピーできませんでした。文字を選択してコピーしてください。",
+      copyRemain: "ACTIVE LIFE CLOCK: {c}、{age}歳。健康寿命({year}年推計 {hale}年)まで、平均であと{r}年。",
+      copyOver: "ACTIVE LIFE CLOCK: {c}、{age}歳。平均の健康寿命({year}年推計 {hale}年)を{r}年超えています。",
+      foot1: "出生時の健康寿命から現在の年齢を引いた、単純な目安です。集団の統計であり、個人の余命や健康状態の予測ではありません。一般に、この値は実際の残りの健康年数より短めに出ます。",
+      foot2: "出典: WHO 出生時健康寿命(男女計)、{year}年推計(Our World in Data経由)。国により年次は異なる場合があります。入力した年齢は端末内で計算するだけで、送信も保存もしません。"
+    },
+    en: {
+      lang: "en",
+      preview: "Preview build: {n} countries (2021 estimates). Before release, we will check whether WHO has published newer estimates.",
+      lead: "On average, how many healthy, active years are left?",
+      age: "Your age", country: "Country",
+      empty: "Enter your age and pick a country.",
+      unit: "years",
+      remainDesc: "of healthy life left on the statistical average",
+      overDesc: "past the average healthy life expectancy",
+      days: "about {d} days", months: "about {m} months", weeks: "about {w} weekends",
+      overNote: "This is a population average. It says nothing certain about you.",
+      lived: "Lived", remain: "Remaining", beyond: "Beyond average",
+      copy: "Copy result", shareX: "Share on X", shareOs: "Share via other apps", tag: "#ACTIVELIFECLOCK", copied: "Copied", copyFail: "Copy failed. Select the text and copy it manually.",
+      copyRemain: "ACTIVE LIFE CLOCK: {c}, age {age}. About {r} healthy years left against the average of {hale} ({year} estimate).",
+      copyOver: "ACTIVE LIFE CLOCK: {c}, age {age}. {r} years past the average healthy life expectancy of {hale} ({year} estimate).",
+      foot1: "A simple estimate: healthy life expectancy at birth minus your current age. It reflects population statistics, not a forecast of your lifespan or health. In general, it understates the healthy years that actually remain.",
+      foot2: "Source: WHO healthy life expectancy at birth (both sexes), {year} estimate (via Our World in Data). Reference years may differ by country. Your age is calculated on your device only; nothing is sent or stored."
+    },
+    zh: {
+      lang: "zh",
+      preview: "预览版：收录 {n} 个国家（2021 年估计）。正式发布前将确认 WHO 是否已有更新的数据。",
+      lead: "按平均水平，还剩多少年健康活跃的时间？",
+      age: "年龄", country: "国家/地区",
+      empty: "请输入年龄并选择国家/地区。",
+      unit: "年",
+      remainDesc: "按统计平均，剩余的健康时间",
+      overDesc: "已超过平均健康预期寿命",
+      days: "约 {d} 天", months: "约 {m} 个月", weeks: "约 {w} 个周末",
+      overNote: "这是群体平均值，并不能确切说明你个人的情况。",
+      lived: "已过", remain: "剩余", beyond: "超出平均",
+      copy: "复制结果", shareX: "分享到 X", shareOs: "用其他应用分享", tag: "#ACTIVELIFECLOCK", copied: "已复制", copyFail: "复制失败，请手动选择文字复制。",
+      copyRemain: "ACTIVE LIFE CLOCK：{c}，{age} 岁。距平均健康预期寿命（{year} 年估计 {hale} 年）还剩约 {r} 年。",
+      copyOver: "ACTIVE LIFE CLOCK：{c}，{age} 岁。已超过平均健康预期寿命（{year} 年估计 {hale} 年）{r} 年。",
+      foot1: "这是用出生时健康预期寿命减去当前年龄得到的简单估算。数据来自群体统计，并非对个人寿命或健康状况的预测。一般而言，此数值会比实际剩余的健康年数偏短。",
+      foot2: "来源：WHO 出生时健康预期寿命（男女合计），{year} 年估计（经由 Our World in Data）。各国参考年份可能不同。年龄仅在你的设备上计算，不会发送或保存。"
+    },
+    es: {
+      lang: "es",
+      preview: "Versión preliminar: {n} países (estimaciones de 2021). Antes de publicar se comprobará si la OMS ha publicado datos más recientes.",
+      lead: "¿Cuántos años de vida activa y saludable quedan, en promedio?",
+      age: "Tu edad", country: "País",
+      empty: "Introduce tu edad y elige un país.",
+      unit: "años",
+      remainDesc: "de vida saludable restantes según el promedio estadístico",
+      overDesc: "por encima de la esperanza de vida saludable promedio",
+      days: "unos {d} días", months: "unos {m} meses", weeks: "unos {w} fines de semana",
+      overNote: "Es un promedio de población. No dice nada seguro sobre ti.",
+      lived: "Vividos", remain: "Restantes", beyond: "Más allá del promedio",
+      copy: "Copiar resultado", shareX: "Compartir en X", shareOs: "Compartir con otras apps", tag: "#ACTIVELIFECLOCK", copied: "Copiado", copyFail: "No se pudo copiar. Selecciona el texto y cópialo manualmente.",
+      copyRemain: "ACTIVE LIFE CLOCK: {c}, {age} años. Quedan unos {r} años saludables frente al promedio de {hale} (estimación de {year}).",
+      copyOver: "ACTIVE LIFE CLOCK: {c}, {age} años. {r} años por encima de la esperanza de vida saludable promedio de {hale} (estimación de {year}).",
+      foot1: "Cálculo simple: esperanza de vida saludable al nacer menos la edad actual. Son estadísticas de población, no una predicción de tu vida ni de tu salud. En general, el resultado queda por debajo de los años saludables que realmente restan.",
+      foot2: "Fuente: OMS, esperanza de vida saludable al nacer (ambos sexos), estimación de {year} (vía Our World in Data). El año de referencia puede variar según el país. Tu edad se calcula solo en tu dispositivo; no se envía ni se guarda."
+    }
+  };
+
+  var BASIS = {
+    ja: { title: "算出の根拠", fact: "{c}の出生時健康寿命: {hale}年(WHO、{year}年推計)", calc: "{hale} − {age} = {r}年(本ツールによる単純計算)", indep: "個人が運営する独立プロジェクトです。特定の企業の公式サービスではありません。" },
+    en: { title: "Basis", fact: "Healthy life expectancy at birth, {c}: {hale} years (WHO, {year} estimate)", calc: "{hale} − {age} = {r} years (simple calculation by this tool)", indep: "An independent personal project. Not an official service of any company." },
+    zh: { title: "计算依据", fact: "{c}出生时健康预期寿命：{hale} 年（WHO，{year} 年估计）", calc: "{hale} − {age} = {r} 年（本工具的简单计算）", indep: "这是个人运营的独立项目，并非任何公司的官方服务。" },
+    es: { title: "Base del cálculo", fact: "Esperanza de vida saludable al nacer, {c}: {hale} años (OMS, estimación de {year})", calc: "{hale} − {age} = {r} años (cálculo simple de esta herramienta)", indep: "Proyecto personal independiente. No es un servicio oficial de ninguna empresa." }
+  };
+
+  var lang = "en";
+  var nav = (navigator.language || "en").toLowerCase();
+  if (nav.indexOf("ja") === 0) lang = "ja";
+  else if (nav.indexOf("zh") === 0) lang = "zh";
+  else if (nav.indexOf("es") === 0) lang = "es";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ageEl = $("age"), countryEl = $("country"), resultEl = $("result");
+  var lastCopyText = "";
+
+  function t() { return STR[lang]; }
+  function fmt(s, o) {
+    return s.replace(/\{(\w+)\}/g, function (_, k) { return o[k]; });
+  }
+  function num(n, d) {
+    try { return n.toLocaleString(lang, { minimumFractionDigits: d, maximumFractionDigits: d }); }
+    catch (e) { return n.toFixed(d); }
+  }
+  function regionName(code) {
+    try { return new Intl.DisplayNames([lang], { type: "region" }).of(code) || code; }
+    catch (e) { return code; }
+  }
+
+  function buildCountries() {
+    var keep = countryEl.value || "JP";
+    var codes = Object.keys(DATA).sort(function (a, b) {
+      return regionName(a).localeCompare(regionName(b), lang);
+    });
+    countryEl.innerHTML = "";
+    codes.forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c; o.textContent = regionName(c);
+      countryEl.appendChild(o);
+    });
+    countryEl.value = DATA[keep] ? keep : "JP";
+  }
+
+  function renderStatic() {
+    var s = t();
+    document.documentElement.lang = s.lang;
+    $("lead").textContent = s.lead;
+    $("ageLabel").textContent = s.age;
+    $("countryLabel").textContent = s.country;
+    var btns = document.querySelectorAll(".langs button");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-lang") === lang ? "true" : "false");
+    }
+  }
+
+  function renderFoot(year) {
+    var s = t();
+    $("foot").innerHTML = "";
+    var p1 = document.createElement("p"); p1.textContent = s.foot1;
+    var p2 = document.createElement("p"); p2.textContent = fmt(s.foot2, { year: year });
+    var p3 = document.createElement("p"); p3.textContent = BASIS[lang].indep;
+    $("foot").appendChild(p1); $("foot").appendChild(p2); $("foot").appendChild(p3);
+  }
+
+  function buildBar(age, hale) {
+    var total = Math.max(Math.ceil(hale), age);
+    var rows = Math.ceil(total / 10);
+    var bar = document.createElement("div");
+    bar.className = "bar";
+    var floorH = Math.floor(hale);
+    var frac = hale - floorH;
+    for (var r = 0; r < rows; r++) {
+      var row = document.createElement("div"); row.className = "row";
+      var tick = document.createElement("div"); tick.className = "tick"; tick.textContent = String(r * 10);
+      row.appendChild(tick);
+      for (var c = 0; c < 10; c++) {
+        var i = r * 10 + c;
+        var cell = document.createElement("div");
+        if (i >= total) { cell.className = "cell void"; }
+        else if (i < age && i < hale) { cell.className = "cell lived"; }
+        else if (i < age) { cell.className = "cell beyond"; }
+        else if (i < floorH) { cell.className = "cell remain"; }
+        else if (i === floorH && frac > 0) {
+          cell.className = "cell";
+          cell.style.background = "linear-gradient(90deg, var(--remain) 0 " + Math.round(frac * 100) + "%, transparent " + Math.round(frac * 100) + "% 100%)";
+        } else { cell.className = "cell"; }
+        row.appendChild(cell);
+      }
+      bar.appendChild(row);
+    }
+    return bar;
+  }
+
+  function dialEl(ratio, over) {
+    var NS = "http://www.w3.org/2000/svg";
+    function mk(tag, attrs, css) {
+      var el = document.createElementNS(NS, tag);
+      for (var k in attrs) el.setAttribute(k, attrs[k]);
+      if (css) for (var c in css) el.style[c] = css[c];
+      return el;
+    }
+    var GLASS = "M10 10 V14 C10 34 26 42 26 50 C26 58 10 66 10 86 V90 H50 V86 C50 66 34 58 34 50 C34 42 50 34 50 14 V10 Z";
+    var r = Math.max(0, Math.min(1, ratio));
+    var topH = 38 * r, botH = 38 * (1 - r);
+    var svg = mk("svg", { viewBox: "0 0 160 160", width: "132", height: "132", "aria-hidden": "true", "class": "dial" });
+    var defs = mk("defs", {});
+    var cp = mk("clipPath", { id: "glassClip" });
+    cp.appendChild(mk("path", { d: GLASS }));
+    defs.appendChild(cp);
+    svg.appendChild(defs);
+    for (var i = 0; i < 60; i++) {
+      var a = (i * 6 - 90) * Math.PI / 180, major = i % 5 === 0;
+      var r1 = major ? 70 : 73, r2 = 77;
+      svg.appendChild(mk("line", {
+        x1: (80 + r1 * Math.cos(a)).toFixed(2), y1: (80 + r1 * Math.sin(a)).toFixed(2),
+        x2: (80 + r2 * Math.cos(a)).toFixed(2), y2: (80 + r2 * Math.sin(a)).toFixed(2)
+      }, { stroke: "var(--g-line)", strokeWidth: major ? "1.6" : "1", opacity: major ? "0.7" : "0.35" }));
+    }
+    svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62 }, { fill: "none", stroke: "var(--g-line)", strokeWidth: "4", opacity: "0.18" }));
+    if (over) {
+      svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62 }, { fill: "none", stroke: "var(--g-over)", strokeWidth: "4", strokeDasharray: "1 4", opacity: "0.8" }));
+    } else if (r > 0) {
+      svg.appendChild(mk("circle", { cx: 80, cy: 80, r: 62, transform: "rotate(-90 80 80)", "class": "arc" },
+        { fill: "none", stroke: "var(--g-top)", strokeWidth: "4", strokeLinecap: "round", strokeDasharray: (r * 389.56).toFixed(1) + " 400" }));
+    }
+    var g = mk("g", { transform: "translate(60.8 48) scale(0.64)" });
+    var clip = mk("g", { "clip-path": "url(#glassClip)" });
+    if (topH > 0) clip.appendChild(mk("rect", { x: 0, y: 48 - topH, width: 60, height: topH }, { fill: "var(--g-top)" }));
+    if (botH > 0) clip.appendChild(mk("rect", { x: 0, y: 90 - botH, width: 60, height: botH }, { fill: over ? "var(--g-over)" : "var(--g-bot)" }));
+    g.appendChild(clip);
+    if (r > 0) {
+      g.appendChild(mk("line", { x1: 30, y1: 48, x2: 30, y2: 90 - botH, "class": "stream" },
+        { stroke: "var(--g-stream)", strokeWidth: "2.4" }));
+    }
+    g.appendChild(mk("path", { d: GLASS }, { fill: "none", stroke: "var(--g-line)", strokeWidth: "4", strokeLinejoin: "round" }));
+    g.appendChild(mk("rect", { x: 6, y: 4, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
+    g.appendChild(mk("rect", { x: 6, y: 91, width: 48, height: 5, rx: 2.5 }, { fill: "var(--g-line)" }));
+    svg.appendChild(g);
+    return svg;
+  }
+
+  function copyText(text, statusEl) {
+    var s = t();
+    function done(ok) { statusEl.textContent = ok ? s.copied : s.copyFail; }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { fallback(); });
+        return;
+      }
+    } catch (e) { /* fall through */ }
+    fallback();
+    function fallback() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        done(ok);
+      } catch (e2) { done(false); }
+    }
+  }
+
+  function render() {
+    var s = t();
+    var raw = ageEl.value.trim();
+    var code = countryEl.value;
+    var d = DATA[code];
+    renderFoot(d ? d.year : 2021);
+    resultEl.innerHTML = "";
+    var age = parseInt(raw, 10);
+    if (raw === "" || isNaN(age) || age < 0 || age > 120) {
+      var e = document.createElement("div"); e.className = "empty"; e.textContent = s.empty;
+      var h0 = document.createElement("div"); h0.className = "hero";
+      h0.appendChild(e); h0.appendChild(dialEl(1, false));
+      resultEl.appendChild(h0);
+      return;
+    }
+    var hale = d.hale;
+    var diff = hale - age;
+    var over = diff <= 0;
+    var shown = Math.abs(diff);
+    var cname = regionName(code);
+
+    var hero = document.createElement("div"); hero.className = "hero" + (over ? " over" : "");
+    var heroText = document.createElement("div");
+    var row = document.createElement("div"); row.className = "numrow";
+    var n = document.createElement("span"); n.className = "num" + (over ? " over" : "");
+    n.textContent = (over ? "+" : "") + num(shown, 1);
+    var u = document.createElement("span"); u.className = "unit"; u.textContent = s.unit;
+    row.appendChild(n); row.appendChild(u);
+    heroText.appendChild(row);
+
+    var desc = document.createElement("p"); desc.className = "desc";
+    desc.textContent = over ? s.overDesc : s.remainDesc;
+    heroText.appendChild(desc);
+
+    if (!over) {
+      var sub = document.createElement("p"); sub.className = "sub";
+      sub.textContent = fmt(s.days, { d: num(Math.round(shown * 365.25), 0) }) + " / " +
+        fmt(s.months, { m: num(Math.round(shown * 12), 0) }) + " / " +
+        fmt(s.weeks, { w: num(Math.round(shown * 52.1775), 0) });
+      heroText.appendChild(sub);
+    } else {
+      var note = document.createElement("p"); note.className = "note"; note.textContent = s.overNote;
+      heroText.appendChild(note);
+    }
+
+    hero.appendChild(heroText);
+    hero.appendChild(dialEl(over ? 0 : diff / hale, over));
+    resultEl.appendChild(hero);
+
+    var bs = BASIS[lang];
+    var basis = document.createElement("div"); basis.className = "basis";
+    var bt = document.createElement("div"); bt.className = "basis-title"; bt.textContent = bs.title;
+    var bf = document.createElement("p");
+    bf.textContent = fmt(bs.fact, { c: cname, hale: num(hale, 1), year: d.year });
+    var bc = document.createElement("p");
+    bc.textContent = fmt(bs.calc, { hale: num(hale, 1), age: age, r: (diff < 0 ? "−" : "") + num(Math.abs(diff), 1) });
+    basis.appendChild(bt); basis.appendChild(bf); basis.appendChild(bc);
+    resultEl.appendChild(basis);
+
+    var bar = buildBar(age, hale);
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", cname + ", " + age + ": " + (over ? "+" : "") + num(shown, 1) + " " + s.unit);
+    resultEl.appendChild(bar);
+
+    var lg = document.createElement("div"); lg.className = "legend";
+    lg.innerHTML = '<span><i style="background:var(--lived);border-color:var(--lived)"></i></span>' +
+      '<span><i style="background:var(--remain);border-color:var(--remain)"></i></span>' +
+      (over || Math.max(Math.ceil(hale), age) > Math.ceil(hale) ? '<span><i style="border-color:var(--beyond);background:repeating-linear-gradient(135deg,var(--beyond) 0 2px,transparent 2px 5px)"></i></span>' : "");
+    var spans = lg.querySelectorAll("span");
+    var labels = [s.lived, s.remain, s.beyond];
+    for (var i = 0; i < spans.length; i++) spans[i].appendChild(document.createTextNode(labels[i]));
+    resultEl.appendChild(lg);
+
+    lastCopyText = fmt(over ? s.copyOver : s.copyRemain, {
+      c: cname, age: age, year: d.year, hale: num(hale, 1), r: num(shown, 1)
+    });
+    var act = document.createElement("div"); act.className = "actions";
+    var btn = document.createElement("button"); btn.type = "button"; btn.textContent = s.copy;
+    var st = document.createElement("span"); st.className = "status"; st.setAttribute("role", "status");
+    btn.addEventListener("click", function () { copyText(lastCopyText, st); });
+
+    var pageUrl = "";
+    try { pageUrl = String(location.href).split("#")[0]; } catch (e3) { pageUrl = ""; }
+    if (pageUrl.indexOf("http") !== 0) pageUrl = "";
+    var shareText = lastCopyText + " " + s.tag;
+
+    var xa = document.createElement("a");
+    xa.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText) +
+      (pageUrl ? "&url=" + encodeURIComponent(pageUrl) : "");
+    xa.target = "_blank"; xa.rel = "noopener noreferrer";
+    xa.textContent = s.shareX;
+
+    act.appendChild(xa);
+    if (navigator.share) {
+      var sb = document.createElement("button"); sb.type = "button"; sb.textContent = s.shareOs;
+      sb.addEventListener("click", function () {
+        var payload = { text: shareText };
+        if (pageUrl) payload.url = pageUrl;
+        navigator.share(payload).catch(function (err) {
+          if (err && err.name === "AbortError") return;
+          copyText(shareText + (pageUrl ? " " + pageUrl : ""), st);
+        });
+      });
+      act.appendChild(sb);
+    }
+    act.appendChild(btn); act.appendChild(st);
+    resultEl.appendChild(act);
+  }
+
+  var langBtns = document.querySelectorAll(".langs button");
+  for (var i = 0; i < langBtns.length; i++) {
+    langBtns[i].addEventListener("click", function (ev) {
+      lang = ev.currentTarget.getAttribute("data-lang");
+      renderStatic(); buildCountries(); render();
+    });
+  }
+  ageEl.addEventListener("input", render);
+  countryEl.addEventListener("change", render);
+
+  countryEl.value = "JP";
+  renderStatic(); buildCountries(); render();
+})();
+</script>
+</body>
+</html>
